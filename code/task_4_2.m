@@ -9,19 +9,21 @@ format compact
 %Load the new images as an image datastore. 
 % ImageDatastore automatically labels the images based on folder names
 
-CLASSIFICATION = 2;
+CLASSIFICATION = 5;
 
 if CLASSIFICATION == 0
     image_data = imageDatastore("data/images/selected/classification_2_classes/",'IncludeSubfolders', true, 'LabelSource', 'foldernames');
 elseif CLASSIFICATION == 1
-        image_data = imageDatastore("data/images/selected/classification_4_classes/",'IncludeSubfolders', true, 'LabelSource', 'foldernames');
+        image_data = imageDatastore("data/images/selected/classification_2_classes_Happ_Ang",'IncludeSubfolders', true, 'LabelSource', 'foldernames');
 elseif CLASSIFICATION == 2
-        image_data = imageDatastore("data/images/noSelected/classification_2_classes/",'IncludeSubfolders', true, 'LabelSource', 'foldernames');
+        image_data = imageDatastore("data/images/selected/classification_4_classes/",'IncludeSubfolders', true, 'LabelSource', 'foldernames');
 elseif CLASSIFICATION == 3
-        image_data = imageDatastore("data/images/noSelected/classification_4_classes/",'IncludeSubfolders', true, 'LabelSource', 'foldernames');
+        image_data = imageDatastore("data/images/noSelected/classification_2_classes/",'IncludeSubfolders', true, 'LabelSource', 'foldernames');
 elseif CLASSIFICATION == 4
-        image_data = imageDatastore("data/images/1000_images/",'IncludeSubfolders', true, 'LabelSource', 'foldernames');
+        image_data = imageDatastore("data/images/noSelected/classification_4_classes/",'IncludeSubfolders', true, 'LabelSource', 'foldernames');
 elseif CLASSIFICATION == 5
+        image_data = imageDatastore("data/images/1000_images/",'IncludeSubfolders', true, 'LabelSource', 'foldernames');
+elseif CLASSIFICATION == 6
         image_data = imageDatastore("data/images/500_images/",'IncludeSubfolders', true, 'LabelSource', 'foldernames');
 end
 
@@ -94,17 +96,6 @@ plotconfusion(target_train, res_train)
 target_val = data_validation.Labels;
 accuracy_val= mean (target_val==res_val);
 plotconfusion(target_val, res_val)
-
-
-%idx = randperm(numel(imdsValidation.Files),4);
-%figure
-%for i = 1:4
-%    subplot(2,2,i)
-%   I = readimage(imdsValidation,idx(i));
-%    imshow(I)
-%    label = YPred(idx(i));
-%    title(string(label));
-%end
 
 %% Testing
 [res_test, scores_test] = classify(new_CNN, augmented_image_data_test);

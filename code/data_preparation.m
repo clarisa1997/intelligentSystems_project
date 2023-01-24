@@ -3,21 +3,21 @@ clear
 close all
 clc
 
-%% Preparation of Data
+%% Data cleaning
 
 outliers_removal_method = 'median';
 % Removal of non numerical values
 dataset = load('data\dataset.mat'); 
 dataset = table2array(dataset.dataset);
 inf_val = isinf(dataset);
-[rows_inf, col_inf] = find(inf_val == 1); %indici della cella Inf
-dataset(rows_inf,:) = []; %elimino tutti i valori della riga che ha un Inf
+[rows_inf, col_inf] = find(inf_val == 1); %indexies of Inf cells
+dataset(rows_inf,:) = []; %delete all the columns that contains Inf values
 
 % Removal of outliers
-dataset = dataset(:, 3:end); %Adesso il dataset sono solo le features senza gli id di soggetti e video
+dataset = dataset(:, 3:end); %Now the dataset consists only of festures without video and subject ids
 clean_dataset = rmoutliers(dataset, outliers_removal_method);
 %save("data/clean_dataset.mat", "clean_dataset");
-[final_rows, ~] = size(clean_dataset); %size mi da sia righe che colonne
+[final_rows, ~] = size(clean_dataset); 
 
 
 %% Data Balancing
@@ -52,7 +52,7 @@ title("Sample for valence before balancing");
 
 fprintf("Data are unbalanced\n");
 
-%Indice del valore min e max
+%Indexies of min and max values
 [~, min_valence] = min(sample_valence);
 [~, max_valence] = max(sample_valence);
 
@@ -79,8 +79,7 @@ for k = 1:rep
             augmentation_factors(1) = 0.95+(0.04)*rand;
             augmentation_factors(2) = 1.01+(0.04)*rand;
             j = round(0.51+(1.98)*rand);
-            % Augmentation, le prime 2 colonne le stesse (livelli), le
-            % altre le cambio attraverso i fattori di augmentation
+            % Augmentation
             row_to_add(3:end) = selected_row(3:end).*augmentation_factors(j); 
             % Addition of the new sample, obtained through augmentation, to
             % the dataset
