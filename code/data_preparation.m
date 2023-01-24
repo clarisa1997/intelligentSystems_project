@@ -67,9 +67,6 @@ row_to_check = final_rows;
 
 for k = 1:rep
     for i = 1:row_to_check
-        %Se questa riga appartiene alla classe (di arousal) che ha meno
-        %campioni, però valence non appartine al classe col massimo e
-        %viceversa allora faccio augmentation su quello minimo
         if (clean_dataset(i,1)==possible_values(min_arousal) && clean_dataset(i,2)~=possible_values(max_valence)) || (clean_dataset(i,1)~=possible_values(max_arousal) && clean_dataset(i,2)==possible_values(min_valence))
             % Selection of i-th row
             selected_row = clean_dataset(i,:);
@@ -88,7 +85,7 @@ for k = 1:rep
         
         if((clean_dataset(i,1)==possible_values(max_arousal) && clean_dataset(i,2)~=possible_values(min_valence)) || (clean_dataset(i,2)==possible_values(max_valence) && clean_dataset(i,1)~=possible_values(min_arousal)))
             clean_dataset(i,:)=[];
-            %fprintf(" I am removing the row %i\n",i);
+         
         end
     end
     samples_arousal = groupcounts(clean_dataset(:,1));
