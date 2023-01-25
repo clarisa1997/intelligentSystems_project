@@ -35,13 +35,13 @@ y_test_valence = target_valence(idxTesting, :);
 %% Features extraction for Arousal
 if EXTRACT_AROUSAL == 1
     features_arousal = [zeros(1,54); 1:54]';
+
     for i = 1:sequentialfs_rep
         fprintf("Iteration %i\n", i);
         %cvpartition discards rows of observations corresponding to missing values in group
         c = cvpartition(y_train_arousal, 'k', 10);
         option = statset('display','iter','useParallel',true);
         %Alla fine avrà selezionato 5 features
-        %inmodel contiene le 1 nelle festures selezionate
         inmodel_arousal = sequentialfs(@myfun, x_train, y_train_arousal, 'cv', c, 'opt', option, 'nFeatures', nfeatures);
         
         % Fetch useful indexes from result of latter sequentialfs

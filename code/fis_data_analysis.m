@@ -56,9 +56,6 @@ nbins = 15;
 binWidth = 0.5;
 y_lim = 30;
 
-
-
-
 figure(1);
 t = tiledlayout(1,3);
 nexttile

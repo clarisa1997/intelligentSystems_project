@@ -74,6 +74,7 @@ for k = 1:rep
             row_to_add = selected_row;
             randomizer = 1 + (rand(1) - 0.5)/10;
             % Augmentation
+            %row_to_add(3:end) = selected_row(3:end).*augmentation_factors(j); 
             row_to_add(3:end) = selected_row(3:end).*randomizer; 
             % Addition of the new sample, obtained through augmentation, to
             % the dataset
