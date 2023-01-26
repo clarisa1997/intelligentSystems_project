@@ -188,15 +188,11 @@ title('Feature 35 high');
 
 % Plot Scatterplots between pairs of features to find some correlations
 figure(7)
-%t = tiledlayout(1,3);
-%nexttile
 scatter(x_24, x_27);
 title('Scatterplot of feature 24 and feature 27');
-%nexttile
 figure(8)
 scatter(x_24, x_35);
 title('Scatterplot of feature 24 and feature 35');
-%nexttile
 figure(9)
 scatter(x_27, x_35);
 title('Scatterplot of feature 27 and feature 35');

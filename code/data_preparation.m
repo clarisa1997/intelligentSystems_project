@@ -60,7 +60,7 @@ augmentation_factors = [0 0];
 
 debug = clean_dataset;
 
-% Oppure possible:values_arousal tanto sono gli stessi valori per entrambi
+
 possible_values = possible_values_valence;
 rep = 80;
 row_to_check = final_rows;
